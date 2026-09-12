@@ -1,8 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
-import { Search, Camera, Eye, Heart, BadgeCheck, Menu, X } from "lucide-react";
-import { SITES, CATEGORIES, HERO_DOMAINS, favicon, type Site } from "@/lib/sites";
-import SiteDetail, { SiteImage } from "@/components/SiteDetail";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Search, Camera, Menu, X, ChevronDown } from "lucide-react";
+import {
+  SITES,
+  HERO_DOMAINS,
+  CATEGORY_META,
+  countFor,
+  favicon,
+  type Site,
+} from "@/lib/sites";
+import SiteDetail from "@/components/SiteDetail";
+import Card from "@/components/SiteCard";
+import Directory from "@/components/Directory";
+import SiteFooter from "@/components/SiteFooter";
+import CookieBanner from "@/components/CookieBanner";
 import { RatingModal, AuthModal, SubmitModal } from "@/components/modals";
 
 export const Route = createFileRoute("/")({
@@ -58,10 +69,7 @@ function HeroGrid() {
     []
   );
   return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-    >
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
       <div className="grid w-[130%] -translate-x-[10%] -translate-y-[6%] rotate-[5deg] grid-cols-7 gap-6 p-6 sm:grid-cols-10 lg:grid-cols-12">
         {tiles.map((t, i) =>
           t.domain ? (
@@ -95,171 +103,158 @@ function Navbar({
   compact,
   onAuth,
   onSubmit,
+  onHome,
+  onExplore,
+  onPickCategory,
 }: {
   compact?: boolean;
   onAuth: () => void;
   onSubmit: () => void;
+  onHome: () => void;
+  onExplore: () => void;
+  onPickCategory: (key: string) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const links = [
-    { label: "Explore", href: "#directory" },
-    { label: "Categories", href: "#directory" },
-    { label: "Submit", href: "#", action: onSubmit },
-  ];
-  return (
-    <nav
-      className={`${compact ? "sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur" : "relative z-20"}`}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4">
-        <span className="text-base font-bold">🇩🇿 Algerian Index</span>
+  const [mega, setMega] = useState(false);
+  const wrap = useRef<HTMLDivElement>(null);
 
-        {compact && (
-          <div className="hidden flex-1 items-center gap-2 rounded-full border border-border bg-card px-4 py-2 shadow-sm md:flex md:max-w-sm">
-            <Search className="h-4 w-4 text-muted-foreground" />
-            <input
-              placeholder="Search the Algerian web..."
-              className="w-full bg-transparent text-sm outline-none"
-            />
+  useEffect(() => {
+    if (!mega) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMega(false);
+    const onClick = (e: MouseEvent) => {
+      if (wrap.current && !wrap.current.contains(e.target as Node)) setMega(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onClick);
+    };
+  }, [mega]);
+
+  return (
+    <div ref={wrap}>
+      <nav
+        className={`${compact ? "sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur" : "relative z-20"}`}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4">
+          <button onClick={onHome} className="text-base font-bold">
+            🇩🇿 Algerian Index
+          </button>
+
+          {compact && (
+            <div className="hidden flex-1 items-center gap-2 rounded-full border border-border bg-card px-4 py-2 shadow-sm md:flex md:max-w-sm">
+              <Search className="h-4 w-4 text-muted-foreground" />
+              <input
+                placeholder="Search the Algerian web..."
+                className="w-full bg-transparent text-sm outline-none"
+              />
+            </div>
+          )}
+
+          <div className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
+            <button onClick={onExplore} className="transition-colors hover:text-foreground">
+              Explore
+            </button>
+            <button
+              onClick={() => setMega((v) => !v)}
+              className="flex items-center gap-1 transition-colors hover:text-foreground"
+            >
+              Categories <ChevronDown className="h-4 w-4" />
+            </button>
+            <button onClick={onSubmit} className="transition-colors hover:text-foreground">
+              Submit
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onAuth}
+              className="hidden rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 md:block"
+            >
+              Sign in
+            </button>
+            <button
+              aria-label="Menu"
+              onClick={() => setOpen((v) => !v)}
+              className="rounded-full p-2 transition-colors hover:bg-muted md:hidden"
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
+
+        {open && (
+          <div className="border-t border-border bg-background px-4 py-3 md:hidden">
+            <button
+              onClick={() => {
+                setOpen(false);
+                onExplore();
+              }}
+              className="block w-full py-2 text-left text-sm text-muted-foreground"
+            >
+              Explore
+            </button>
+            <button
+              onClick={() => {
+                setOpen(false);
+                setMega(true);
+              }}
+              className="block w-full py-2 text-left text-sm text-muted-foreground"
+            >
+              Categories
+            </button>
+            <button
+              onClick={() => {
+                setOpen(false);
+                onSubmit();
+              }}
+              className="block w-full py-2 text-left text-sm text-muted-foreground"
+            >
+              Submit
+            </button>
+            <button
+              onClick={() => {
+                setOpen(false);
+                onAuth();
+              }}
+              className="mt-2 w-full rounded-full bg-primary py-2 text-sm font-medium text-primary-foreground"
+            >
+              Sign in
+            </button>
           </div>
         )}
+      </nav>
 
-        <div className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              onClick={(e) => {
-                if (l.action) {
-                  e.preventDefault();
-                  l.action();
-                }
-              }}
-              className="transition-colors hover:text-foreground"
-            >
-              {l.label}
-            </a>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={onAuth}
-            className="hidden rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 md:block"
-          >
-            Sign in
-          </button>
-          <button
-            aria-label="Menu"
-            onClick={() => setOpen((v) => !v)}
-            className="rounded-full p-2 transition-colors hover:bg-muted md:hidden"
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-      </div>
-
-      {open && (
-        <div className="border-t border-border bg-background px-4 py-3 md:hidden">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              onClick={(e) => {
-                setOpen(false);
-                if (l.action) {
-                  e.preventDefault();
-                  l.action();
-                }
-              }}
-              className="block py-2 text-sm text-muted-foreground"
-            >
-              {l.label}
-            </a>
-          ))}
-          <button
-            onClick={() => {
-              setOpen(false);
-              onAuth();
-            }}
-            className="mt-2 w-full rounded-full bg-primary py-2 text-sm font-medium text-primary-foreground"
-          >
-            Sign in
-          </button>
+      {mega && (
+        <div className="absolute left-0 right-0 z-40 border-b border-border bg-background shadow-xl">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 gap-2 px-4 py-6 sm:grid-cols-3 lg:grid-cols-4">
+            {CATEGORY_META.map((c) => (
+              <button
+                key={c.key}
+                onClick={() => {
+                  setMega(false);
+                  onPickCategory(c.key);
+                }}
+                className="flex items-center justify-between gap-2 rounded-xl px-3 py-2 text-left text-sm transition-colors hover:bg-muted"
+              >
+                <span className="truncate">
+                  {c.emoji} {c.label}
+                </span>
+                <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+                  {countFor(c.key)}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       )}
-    </nav>
-  );
-}
-
-function Card({ site, onOpen, onLike }: { site: Site; onOpen: () => void; onLike: () => void }) {
-  return (
-    <article
-      onClick={onOpen}
-      className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card transition-all duration-200 hover:scale-[1.02] hover:shadow-xl"
-    >
-      <div className="aspect-[16/10] w-full overflow-hidden bg-muted">
-        <SiteImage site={site} className="h-full w-full" />
-      </div>
-      <div className="space-y-3 p-4">
-        <div className="flex items-center gap-2">
-          {site.verified && <BadgeCheck className="h-4 w-4 text-foreground" />}
-          <img src={favicon(site.url, 64)} alt="" className="h-5 w-5 rounded" />
-          <span className="truncate text-sm font-semibold">{site.name}</span>
-        </div>
-        <p className="truncate text-xs text-muted-foreground">{site.description}</p>
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-muted text-[10px] font-semibold text-foreground">
-            {site.name.charAt(0)}
-          </span>
-          <span className="truncate">{site.url}</span>
-          <span className="ml-auto flex items-center gap-1">
-            <Eye className="h-3.5 w-3.5" /> {site.views}
-          </span>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onLike();
-            }}
-            className="flex items-center gap-1 transition-colors hover:text-foreground"
-          >
-            <Heart className="h-3.5 w-3.5" /> {site.likes}
-          </button>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="border-t border-border bg-background">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="font-bold">🇩🇿 Algerian Index</p>
-          <p className="text-sm text-muted-foreground">Discover the Algerian web</p>
-        </div>
-        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-          {["About", "Submit a Site", "Categories", "Contact", "Privacy"].map((l) => (
-            <a key={l} href="#" className="transition-colors hover:text-foreground">
-              {l}
-            </a>
-          ))}
-        </div>
-        <div className="text-sm text-muted-foreground md:text-right">
-          <p>Made in Algeria</p>
-          <p>© 2026 M7M Holdings</p>
-        </div>
-      </div>
-      <div className="mx-auto max-w-7xl px-4 pb-10">
-        <div className="mx-auto flex h-[90px] w-full max-w-[728px] items-center justify-center rounded-2xl border border-dashed border-border text-xs uppercase tracking-widest text-muted-foreground">
-          Advertisement
-        </div>
-      </div>
-    </footer>
+    </div>
   );
 }
 
 function Index() {
+  const [screen, setScreen] = useState<"landing" | "directory" | "detail">("landing");
   const [selected, setSelected] = useState<Site | null>(null);
   const [category, setCategory] = useState("All");
   const [rating, setRating] = useState<Site | null>(null);
@@ -267,39 +262,79 @@ function Index() {
   const [submit, setSubmit] = useState(false);
   const placeholder = useTypewriter();
 
-  const list = useMemo(
-    () => (category === "All" ? SITES : SITES.filter((s) => s.category === category)),
-    [category]
+  const openSite = (s: Site) => {
+    setSelected(s);
+    setScreen("detail");
+    window.scrollTo({ top: 0 });
+  };
+
+  const goDirectory = (cat?: string) => {
+    if (cat) setCategory(cat);
+    setScreen("directory");
+    window.scrollTo({ top: 0 });
+  };
+
+  const nav = (
+    <Navbar
+      compact={screen !== "landing"}
+      onAuth={() => setAuth(true)}
+      onSubmit={() => setSubmit(true)}
+      onHome={() => setScreen("landing")}
+      onExplore={() => goDirectory()}
+      onPickCategory={(c) => goDirectory(c)}
+    />
   );
 
-  if (selected) {
+  const overlays = (
+    <>
+      <RatingModal open={!!rating} onClose={() => setRating(null)} siteName={rating?.name ?? ""} />
+      <AuthModal open={auth} onClose={() => setAuth(false)} />
+      <SubmitModal open={submit} onClose={() => setSubmit(false)} />
+      <CookieBanner />
+    </>
+  );
+
+  if (screen === "detail" && selected) {
     return (
       <div className="min-h-screen bg-background font-sans">
-        <Navbar compact onAuth={() => setAuth(true)} onSubmit={() => setSubmit(true)} />
+        {nav}
         <SiteDetail
           site={selected}
-          onBack={() => setSelected(null)}
+          onBack={() => setScreen("directory")}
           onRate={() => setRating(selected)}
+          onNavigate={openSite}
         />
-        <Footer />
-        <RatingModal
-          open={!!rating}
-          onClose={() => setRating(null)}
-          siteName={rating?.name ?? ""}
-        />
-        <AuthModal open={auth} onClose={() => setAuth(false)} />
-        <SubmitModal open={submit} onClose={() => setSubmit(false)} />
+        <SiteFooter />
+        {overlays}
       </div>
     );
   }
 
+  if (screen === "directory") {
+    return (
+      <div className="min-h-screen bg-background font-sans">
+        {nav}
+        <Directory
+          category={category}
+          onCategory={setCategory}
+          onOpen={openSite}
+          onLike={(s) => setRating(s)}
+        />
+        <SiteFooter />
+        {overlays}
+      </div>
+    );
+  }
+
+  const preview = SITES.slice(0, 9);
+
   return (
     <div className="min-h-screen bg-background font-sans">
-      <section className="relative min-h-screen overflow-hidden bg-background">
+      <section className="relative overflow-hidden bg-background pb-20 pt-6">
         <HeroGrid />
-        <Navbar onAuth={() => setAuth(true)} onSubmit={() => setSubmit(true)} />
+        {nav}
 
-        <div className="relative z-20 mx-auto flex max-w-3xl flex-col items-center px-4 pb-20 pt-16 text-center sm:pt-24">
+        <div className="relative z-20 mx-auto flex max-w-3xl flex-col items-center px-4 pt-16 text-center sm:pt-24">
           <h1 className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
             Every Algerian Website.
             <br />
@@ -332,57 +367,53 @@ function Index() {
             ))}
           </div>
 
-          <a
-            href="#directory"
+          <button
+            onClick={() => goDirectory()}
             className="mt-10 rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             Explore Directory →
-          </a>
+          </button>
         </div>
       </section>
 
-      <div id="directory" className="bg-surface">
-        <Navbar compact onAuth={() => setAuth(true)} onSubmit={() => setSubmit(true)} />
-        <section className="mx-auto max-w-7xl px-4 py-10">
-          <div className="flex gap-2 overflow-x-auto pb-4">
-            {CATEGORIES.map((c) => (
-              <button
-                key={c}
-                onClick={() => setCategory(c)}
-                className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
-                  category === c
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border bg-card text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {c}
-              </button>
+      <section className="mx-auto max-w-7xl px-4 pb-16">
+        <div className="relative">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {preview.map((s) => (
+              <Card key={s.url} site={s} onOpen={() => openSite(s)} onLike={() => setRating(s)} />
             ))}
           </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {list.map((s) => (
-              <Card
-                key={s.url}
-                site={s}
-                onOpen={() => setSelected(s)}
-                onLike={() => setRating(s)}
-              />
-            ))}
-          </div>
+          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-72 bg-gradient-to-b from-transparent to-background" />
 
-          {list.length === 0 && (
-            <p className="py-16 text-center text-sm text-muted-foreground">
-              No sites in this category yet.
+          <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center gap-3 pb-4 text-center">
+            <p className="text-lg font-semibold">
+              You&apos;ve seen only the first 9 Algerian sites
             </p>
-          )}
-        </section>
-      </div>
+            <p className="text-sm text-muted-foreground">
+              Sign up to explore all 200+ sites in the full directory
+            </p>
+            <button
+              onClick={() => setAuth(true)}
+              className="rounded-full border border-border bg-card px-6 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-muted"
+            >
+              Continue with Google
+            </button>
+          </div>
+        </div>
 
-      <Footer />
-      <RatingModal open={!!rating} onClose={() => setRating(null)} siteName={rating?.name ?? ""} />
-      <AuthModal open={auth} onClose={() => setAuth(false)} />
-      <SubmitModal open={submit} onClose={() => setSubmit(false)} />
+        <div className="mt-10 flex justify-center">
+          <button
+            onClick={() => goDirectory()}
+            className="rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            Explore All Algerian Sites →
+          </button>
+        </div>
+      </section>
+
+      <SiteFooter />
+      {overlays}
     </div>
   );
 }

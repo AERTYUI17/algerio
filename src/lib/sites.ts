@@ -215,3 +215,31 @@ export const REVIEWS = [
     text: "I use it weekly. Easily one of the best Algerian sites out there.",
   },
 ];
+
+export type CategoryMeta = { key: string; label: string; emoji: string };
+
+export const CATEGORY_META: CategoryMeta[] = [
+  { key: "News", label: "News & Media", emoji: "📰" },
+  { key: "Jobs", label: "Jobs & Career", emoji: "💼" },
+  { key: "E-commerce", label: "E-commerce", emoji: "🛒" },
+  { key: "Gov", label: "Government", emoji: "🏛️" },
+  { key: "Education", label: "Education & Universities", emoji: "🎓" },
+  { key: "Startups", label: "Startups", emoji: "🚀" },
+  { key: "Finance", label: "Finance & Banking", emoji: "💰" },
+  { key: "Entertainment", label: "Entertainment", emoji: "🎮" },
+  { key: "Tools", label: "Tools & Utilities", emoji: "🔧" },
+  { key: "Mobile", label: "Mobile Apps", emoji: "📱" },
+  { key: "Health", label: "Health & Medical", emoji: "🏥" },
+  { key: "Legal", label: "Legal & Administration", emoji: "⚖️" },
+  { key: "Real Estate", label: "Real Estate", emoji: "🏗️" },
+  { key: "Transport", label: "Transport & Logistics", emoji: "🚗" },
+  { key: "Food", label: "Food & Delivery", emoji: "🍔" },
+  { key: "Telecom", label: "Telecom & Internet", emoji: "📡" },
+  { key: "Research", label: "Research & Science", emoji: "🔬" },
+  { key: "B2B", label: "B2B Services", emoji: "🤝" },
+  { key: "Design", label: "Design & Creative", emoji: "🎨" },
+  { key: "Directories", label: "Directories & Indexes", emoji: "📚" },
+];
+
+export const countFor = (key: string) =>
+  SITES.filter((s) => s.category === key).length;
