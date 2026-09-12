@@ -32,7 +32,7 @@ function useTypewriter() {
   const [i, setI] = useState(0);
   const [text, setText] = useState("");
   useEffect(() => {
-    const word = TYPED[i % TYPED.length];
+    const word = TYPED[i % TYPED.length] ?? "";
     let n = 0;
     const typer = setInterval(() => {
       n += 1;
