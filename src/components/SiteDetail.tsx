@@ -277,6 +277,29 @@ export default function SiteDetail({
           </div>
         </aside>
       </div>
+
+      {similar.length > 0 && (
+        <section className="mt-12">
+          <h2 className="text-xl font-semibold">Similar Algerian Sites</h2>
+          <div className="mt-4 flex gap-4 overflow-x-auto pb-2">
+            {similar.map((s) => (
+              <button
+                key={s.url}
+                onClick={() => onNavigate?.(s)}
+                className="w-56 shrink-0 overflow-hidden rounded-2xl border border-border bg-card text-left transition-shadow hover:shadow-lg"
+              >
+                <div className="aspect-[16/10] w-full overflow-hidden bg-muted">
+                  <SiteImage site={s} className="h-full w-full" iconSize={40} />
+                </div>
+                <div className="p-3">
+                  <p className="truncate text-sm font-semibold">{s.name}</p>
+                  <p className="truncate text-xs text-muted-foreground">{s.url}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }
