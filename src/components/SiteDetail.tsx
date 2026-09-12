@@ -16,7 +16,7 @@ import {
   Calendar,
   Tag,
 } from "lucide-react";
-import { favicon, shot, REVIEWS, type Site } from "@/lib/sites";
+import { favicon, shot, REVIEWS, SITES, type Site } from "@/lib/sites";
 
 export function SiteImage({
   site,
@@ -74,11 +74,17 @@ export default function SiteDetail({
   site,
   onBack,
   onRate,
+  onNavigate,
 }: {
   site: Site;
   onBack: () => void;
   onRate: () => void;
+  onNavigate?: (s: Site) => void;
 }) {
+  const similar = SITES.filter(
+    (s) => s.category === site.category && s.url !== site.url
+  ).slice(0, 4);
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
       <button
