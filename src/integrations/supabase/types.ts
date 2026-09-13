@@ -14,7 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      sites: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          founder: string
+          id: string
+          likes: number
+          name: string
+          rating: number
+          status: string
+          tags: string[]
+          updated_at: string
+          url: string
+          verified: boolean
+          views: string
+          why_algerian: string
+          year: number
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description: string
+          founder?: string
+          id?: string
+          likes?: number
+          name: string
+          rating?: number
+          status?: string
+          tags?: string[]
+          updated_at?: string
+          url: string
+          verified?: boolean
+          views?: string
+          why_algerian?: string
+          year?: number
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          founder?: string
+          id?: string
+          likes?: number
+          name?: string
+          rating?: number
+          status?: string
+          tags?: string[]
+          updated_at?: string
+          url?: string
+          verified?: boolean
+          views?: string
+          why_algerian?: string
+          year?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
