@@ -15,8 +15,8 @@ export type AdSpace = {
   monthly: number;
   quarter: number;
   status: AdSpaceStatus;
-  renter?: string;
-  expiry?: string;
+  renter?: string | undefined;
+  expiry?: string | undefined;
 };
 
 export const AD_SPACES: AdSpace[] = [
@@ -158,9 +158,9 @@ export type Submission = {
   date: string;
   aiNotes: string;
   status: SubmissionStatus;
-  reason?: string;
-  featured?: boolean;
-  claimed?: boolean;
+  reason?: string | undefined;
+  featured?: boolean | undefined;
+  claimed?: boolean | undefined;
 };
 
 export const SUBMISSIONS: Submission[] = [
