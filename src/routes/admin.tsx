@@ -15,6 +15,8 @@ import {
   type Submission,
 } from "@/lib/platform";
 import { CATEGORY_META } from "@/lib/sites";
+import logoAsset from "@/assets/logo.png.asset.json";
+import logoWhiteAsset from "@/assets/logo-white.png.asset.json";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -88,7 +90,10 @@ function AdminPage() {
           sidebar ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <p className="px-3 text-sm font-bold">🇩🇿 Admin Console</p>
+        <p className="flex items-center gap-2 px-3 text-sm font-bold">
+          <img src={logoWhiteAsset.url} alt="The Algerian Index logo" className="h-6 w-6 object-contain" />
+          Admin Console
+        </p>
         <nav className="mt-6 space-y-1">
           {NAV.map((n) => (
             <button
@@ -282,7 +287,10 @@ function Login({ onSuccess }: { onSuccess: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4 font-sans">
       <form onSubmit={submit} className="w-full max-w-sm rounded-2xl border border-border bg-card p-8 shadow-lg">
-        <p className="text-lg font-bold">🇩🇿 Admin access</p>
+        <p className="flex items-center gap-2 text-lg font-bold">
+          <img src={logoAsset.url} alt="The Algerian Index logo" className="h-7 w-7 object-contain" />
+          Admin access
+        </p>
         <p className="mt-1 text-sm text-muted-foreground">Enter the admin password to continue.</p>
         <input
           type="password"

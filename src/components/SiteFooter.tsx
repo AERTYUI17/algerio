@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SITES, CATEGORY_META } from "@/lib/sites";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 const FAQ = [
   {
@@ -97,7 +98,7 @@ export default function SiteFooter() {
 
           <div className="mt-10 flex items-center gap-4">
             <div className="h-px flex-1 bg-border" />
-            <span className="text-lg">🇩🇿</span>
+            <img src={logoAsset.url} alt="The Algerian Index logo" className="h-8 w-8 object-contain" />
             <div className="h-px flex-1 bg-border" />
           </div>
           <p className="mt-4 text-center text-sm text-muted-foreground">
