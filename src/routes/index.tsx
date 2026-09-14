@@ -15,6 +15,7 @@ import Directory from "@/components/Directory";
 import SiteFooter from "@/components/SiteFooter";
 import CookieBanner from "@/components/CookieBanner";
 import { RatingModal, AuthModal, SubmitModal } from "@/components/modals";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -138,8 +139,9 @@ function Navbar({
         className={`${compact ? "sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur" : "relative z-20"}`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4">
-          <button onClick={onHome} className="text-base font-bold">
-            🇩🇿 Algerian Index
+          <button onClick={onHome} className="flex items-center gap-2 text-base font-bold">
+            <img src={logoAsset.url} alt="The Algerian Index logo" className="h-7 w-7 object-contain" />
+            Algerian Index
           </button>
 
           {compact && (
