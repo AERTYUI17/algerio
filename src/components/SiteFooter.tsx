@@ -10,7 +10,7 @@ import logoAsset from "@/assets/logo.png.asset.json";
 
 const FAQ = [
   {
-    q: "What is The Algerian Index?",
+    q: "What is Algerio?",
     a: "A curated directory of Algerian websites, tools and platforms.",
   },
   {
@@ -98,7 +98,7 @@ export default function SiteFooter() {
 
           <div className="mt-10 flex items-center gap-4">
             <div className="h-px flex-1 bg-border" />
-            <img src={logoAsset.url} alt="The Algerian Index logo" className="h-8 w-8 object-contain" />
+            <img src={logoAsset.url} alt="Algerio logo" className="h-8 w-8 object-contain" />
             <div className="h-px flex-1 bg-border" />
           </div>
           <p className="mt-4 text-center text-sm text-muted-foreground">

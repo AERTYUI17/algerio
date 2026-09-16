@@ -190,7 +190,7 @@ export function AuthModal({ open, onClose }: { open: boolean; onClose: () => voi
     <Modal open={open} onClose={onClose} width="max-w-md">
       <div className="space-y-4">
         <div>
-          <h2 className="text-xl font-bold">Join Algerian Index</h2>
+          <h2 className="text-xl font-bold">Join Algerio</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Sign in to rate, comment and submit sites
           </p>

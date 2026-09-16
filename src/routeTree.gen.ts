@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as OwnerDashboardRouteImport } from './routes/owner-dashboard'
+import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as SponsorsHallRouteImport } from './routes/sponsors-hall'
 import { Route as SubmitRouteImport } from './routes/submit'
 
@@ -30,6 +31,11 @@ const OwnerDashboardRoute = OwnerDashboardRouteImport.update({
   path: '/owner-dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SponsorsRoute = SponsorsRouteImport.update({
+  id: '/sponsors',
+  path: '/sponsors',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SponsorsHallRoute = SponsorsHallRouteImport.update({
   id: '/sponsors-hall',
   path: '/sponsors-hall',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/owner-dashboard': typeof OwnerDashboardRoute
+  '/sponsors': typeof SponsorsRoute
   '/sponsors-hall': typeof SponsorsHallRoute
   '/submit': typeof SubmitRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/owner-dashboard': typeof OwnerDashboardRoute
+  '/sponsors': typeof SponsorsRoute
   '/sponsors-hall': typeof SponsorsHallRoute
   '/submit': typeof SubmitRoute
 }
@@ -60,19 +68,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/owner-dashboard': typeof OwnerDashboardRoute
+  '/sponsors': typeof SponsorsRoute
   '/sponsors-hall': typeof SponsorsHallRoute
   '/submit': typeof SubmitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/owner-dashboard' | '/sponsors-hall' | '/submit'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/owner-dashboard'
+    | '/sponsors'
+    | '/sponsors-hall'
+    | '/submit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/owner-dashboard' | '/sponsors-hall' | '/submit'
+  to:
+    | '/'
+    | '/admin'
+    | '/owner-dashboard'
+    | '/sponsors'
+    | '/sponsors-hall'
+    | '/submit'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/owner-dashboard'
+    | '/sponsors'
     | '/sponsors-hall'
     | '/submit'
   fileRoutesById: FileRoutesById
@@ -81,6 +103,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   OwnerDashboardRoute: typeof OwnerDashboardRoute
+  SponsorsRoute: typeof SponsorsRoute
   SponsorsHallRoute: typeof SponsorsHallRoute
   SubmitRoute: typeof SubmitRoute
 }
@@ -108,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OwnerDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sponsors': {
+      id: '/sponsors'
+      path: '/sponsors'
+      fullPath: '/sponsors'
+      preLoaderRoute: typeof SponsorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sponsors-hall': {
       id: '/sponsors-hall'
       path: '/sponsors-hall'
@@ -129,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   OwnerDashboardRoute: OwnerDashboardRoute,
+  SponsorsRoute: SponsorsRoute,
   SponsorsHallRoute: SponsorsHallRoute,
   SubmitRoute: SubmitRoute,
 }

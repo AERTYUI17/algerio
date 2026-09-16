@@ -21,10 +21,10 @@ import logoWhiteAsset from "@/assets/logo-white.png.asset.json";
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Admin Dashboard — The Algerian Index" },
-      { name: "description", content: "Moderate submissions, ad spaces and sponsors of The Algerian Index." },
-      { property: "og:title", content: "Admin Dashboard — The Algerian Index" },
-      { property: "og:description", content: "Internal moderation dashboard for The Algerian Index." },
+      { title: "Admin Dashboard — Algerio" },
+      { name: "description", content: "Moderate submissions, ad spaces and sponsors of Algerio." },
+      { property: "og:title", content: "Admin Dashboard — Algerio" },
+      { property: "og:description", content: "Internal moderation dashboard for Algerio." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/admin")({
 });
 
 const SESSION_KEY = "dz-admin-session";
-const PASSWORD = (import.meta.env["VITE_ADMIN_PASSWORD"] as string | undefined) ?? "M7M_ADMIN_2026";
+const PASSWORD = (import.meta.env["VITE_ADMIN_PASSWORD"] as string | undefined) ?? "Qwertyuiop$2423";
 
 const NAV = [
   { key: "overview", label: "Overview", icon: "📊" },
@@ -91,7 +91,7 @@ function AdminPage() {
         }`}
       >
         <p className="flex items-center gap-2 px-3 text-sm font-bold">
-          <img src={logoWhiteAsset.url} alt="The Algerian Index logo" className="h-6 w-6 object-contain" />
+          <img src={logoWhiteAsset.url} alt="Algerio logo" className="h-6 w-6 object-contain" />
           Admin Console
         </p>
         <nav className="mt-6 space-y-1">
@@ -288,7 +288,7 @@ function Login({ onSuccess }: { onSuccess: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4 font-sans">
       <form onSubmit={submit} className="w-full max-w-sm rounded-2xl border border-border bg-card p-8 shadow-lg">
         <p className="flex items-center gap-2 text-lg font-bold">
-          <img src={logoAsset.url} alt="The Algerian Index logo" className="h-7 w-7 object-contain" />
+          <img src={logoAsset.url} alt="Algerio logo" className="h-7 w-7 object-contain" />
           Admin access
         </p>
         <p className="mt-1 text-sm text-muted-foreground">Enter the admin password to continue.</p>
