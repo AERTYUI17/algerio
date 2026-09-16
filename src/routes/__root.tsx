@@ -77,10 +77,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "The Algerian Index" },
+      { title: "Algerio" },
       { name: "description", content: "Every Algerian website in one place — a curated directory of Algerian sites, tools and platforms." },
       { name: "author", content: "M7M Holdings" },
-      { property: "og:title", content: "The Algerian Index" },
+      { property: "og:title", content: "Algerio" },
       { property: "og:description", content: "Every Algerian website in one place." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

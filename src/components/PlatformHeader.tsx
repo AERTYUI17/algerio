@@ -12,7 +12,7 @@ export default function PlatformHeader() {
         <Link to="/" className="flex items-center gap-2 font-bold">
           <img src={markAsset.url} alt="Algerio" className="h-8 w-8 object-contain" />
           <span>Algerio</span>
-          <span className="hidden text-xs font-normal text-muted-foreground sm:inline">The Algerian Index</span>
+          <span className="hidden text-xs font-normal text-muted-foreground sm:inline">Algerio</span>
         </Link>
         <nav className="hidden items-center gap-5 text-sm md:flex">
           <Link to="/" className="text-muted-foreground hover:text-foreground">Directory</Link>

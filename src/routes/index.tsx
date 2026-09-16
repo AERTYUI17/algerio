@@ -20,13 +20,13 @@ import logoAsset from "@/assets/logo.png.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "The Algerian Index — Every Algerian Website In One Place" },
+      { title: "Algerio — Every Algerian Website In One Place" },
       {
         name: "description",
         content:
           "A curated directory of Algerian websites: e-commerce, news, jobs, startups, government and more. Discover, rate and submit the Algerian web.",
       },
-      { property: "og:title", content: "The Algerian Index" },
+      { property: "og:title", content: "Algerio" },
       {
         property: "og:description",
         content: "Discover, rate and submit the best Algerian websites — all in one directory.",
@@ -140,8 +140,8 @@ function Navbar({
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4">
           <button onClick={onHome} className="flex items-center gap-2 text-base font-bold">
-            <img src={logoAsset.url} alt="The Algerian Index logo" className="h-7 w-7 object-contain" />
-            Algerian Index
+            <img src={logoAsset.url} alt="Algerio logo" className="h-7 w-7 object-contain" />
+            Algerio
           </button>
 
           {compact && (

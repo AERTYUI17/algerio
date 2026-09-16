@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { SPONSORS, money, tierFor } from "@/lib/platform";
 export const Route = createFileRoute("/sponsors-hall")({ head: () => ({ meta: [
   { title: "Sponsors Hall of Fame — Algerio" }, { name: "description", content: "Meet the organizations supporting Algeria's open website directory." },
-  { property: "og:title", content: "Sponsors Hall of Fame — Algerio" }, { property: "og:description", content: "The organizations supporting The Algerian Index by Algerio." },
+  { property: "og:title", content: "Sponsors Hall of Fame — Algerio" }, { property: "og:description", content: "The organizations supporting Algerio by Algerio." },
   { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" },
 ]}), component: SponsorsHall });
 const TierIcon = ({ spent }: { spent: number }) => { const t = tierFor(spent).name; return t === "Elite Sponsor" ? <Crown className="h-4 w-4" /> : t === "Premium Sponsor" ? <Gem className="h-4 w-4" /> : <Star className="h-4 w-4" />; };
