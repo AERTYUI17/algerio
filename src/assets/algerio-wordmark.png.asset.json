@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "f9c0899c-849f-40c9-8b96-bc0a5f3b2e39",
-  "project_id": "8187d2c5-aa25-4960-a1f9-13982ccf4fb1",
-  "url": "/__l5e/assets-v1/f9c0899c-849f-40c9-8b96-bc0a5f3b2e39/algerio-wordmark.png",
-  "r2_key": "a/v1/8187d2c5-aa25-4960-a1f9-13982ccf4fb1/f9c0899c-849f-40c9-8b96-bc0a5f3b2e39/algerio-wordmark.png",
-  "original_filename": "algerio-wordmark.png",
-  "size": 291078,
   "content_type": "image/png",
-  "created_at": "2026-09-15T17:16:35Z"
+  "created_at": "2026-09-15T17:16:35Z",
+  "original_filename": "algerio-wordmark.png",
+  "project_id": "ae25432e-7334-403c-bd98-53726150bfc3",
+  "r2_key": "a/v1/ae25432e-7334-403c-bd98-53726150bfc3/f9c0899c-849f-40c9-8b96-bc0a5f3b2e39/algerio-wordmark.png",
+  "size": 291078,
+  "url": "/__l5e/assets-v1/f9c0899c-849f-40c9-8b96-bc0a5f3b2e39/algerio-wordmark.png",
+  "version": 1
 }
