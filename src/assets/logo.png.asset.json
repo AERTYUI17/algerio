@@ -1,11 +1,11 @@
 {
+  "version": 1,
   "asset_id": "904e6c94-4965-45cc-b6a0-450393731e40",
-  "content_type": "image/webp",
-  "created_at": "2026-09-14T00:04:02Z",
-  "original_filename": "algerian-index-logo.png",
-  "project_id": "ae25432e-7334-403c-bd98-53726150bfc3",
-  "r2_key": "a/v1/ae25432e-7334-403c-bd98-53726150bfc3/904e6c94-4965-45cc-b6a0-450393731e40/algerian-index-logo.png",
-  "size": 42882,
+  "project_id": "8187d2c5-aa25-4960-a1f9-13982ccf4fb1",
   "url": "/__l5e/assets-v1/904e6c94-4965-45cc-b6a0-450393731e40/algerian-index-logo.png",
-  "version": 1
+  "r2_key": "a/v1/8187d2c5-aa25-4960-a1f9-13982ccf4fb1/904e6c94-4965-45cc-b6a0-450393731e40/algerian-index-logo.png",
+  "original_filename": "algerian-index-logo.png",
+  "size": 42882,
+  "content_type": "image/webp",
+  "created_at": "2026-09-14T00:04:02Z"
 }
