@@ -102,7 +102,7 @@ export const AD_SPACES: AdSpace[] = [
 export const ACTIVE_ADS: Partial<Record<AdSpaceKey, { image: string; url: string; sponsor: string }>> =
   {};
 
-export const AD_CONTACT = "contact@algerian-index.dz";
+export const AD_CONTACT = "contact@algerio.dz";
 
 export const money = (n: number) => `${n.toLocaleString("en-US")} دج`;
 
@@ -316,7 +316,7 @@ export const WILAYAS = [
   "Béni Abbès", "In Salah", "In Guezzam", "Touggourt", "Djanet", "El M'Ghair", "El Meniaa",
 ];
 
-export const M7M_PRODUCTS = [
+export const ALGERIO_PRODUCTS = [
   { name: "DLAL", desc: "Classifieds", soon: false },
   { name: "Weilo", desc: "Education", soon: false },
   { name: "KHIDMA", desc: "Services", soon: false },

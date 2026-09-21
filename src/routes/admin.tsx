@@ -726,7 +726,7 @@ function UsersPanel() {
 
 function SettingsPanel() {
   const [autoApprove, setAutoApprove] = useState(false);
-  const [email, setEmail] = useState("contact@algerian-index.dz");
+  const [email, setEmail] = useState("contact@algerio.dz");
 
   return (
     <div className="max-w-xl">

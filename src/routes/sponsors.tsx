@@ -165,7 +165,7 @@ function SponsorsPage() {
                     <p className="mt-1 flex justify-between"><span className="text-muted-foreground">Total</span><span className="font-semibold">{money(amount)}</span></p>
                   </div>
                   <div className="rounded-2xl border border-border p-4 text-sm">
-                    <p className="flex items-center gap-2 font-semibold"><Landmark className="h-4 w-4" /> M7M Holdings — BNA Alger</p>
+                    <p className="flex items-center gap-2 font-semibold"><Landmark className="h-4 w-4" /> ALGERIO — BNA Alger</p>
                     <p className="mt-2 text-muted-foreground">RIB</p>
                     <div className="flex items-center justify-between gap-2">
                       <code className="font-mono">005 00123 4567891011 21</code>

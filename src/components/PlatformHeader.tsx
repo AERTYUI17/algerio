@@ -10,12 +10,11 @@ export default function PlatformHeader() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-2 font-bold">
-          <img src={markAsset.url} alt="Algerio" className="h-8 w-8 object-contain" />
-          <span>Algerio</span>
-          <span className="hidden text-xs font-normal text-muted-foreground sm:inline">Algerio</span>
+          <img src={markAsset.url} alt="ALGERIO" className="h-8 w-8 object-contain" />
+          <span>ALGERIO</span>
         </Link>
         <nav className="hidden items-center gap-5 text-sm md:flex">
-          <Link to="/" className="text-muted-foreground hover:text-foreground">Directory</Link>
+          <Link to="/" className="text-muted-foreground hover:text-foreground">Explore</Link>
           <Link to="/sponsors-hall" className="text-muted-foreground hover:text-foreground">Our Sponsors</Link>
           <Link to="/owner-dashboard" className="text-muted-foreground hover:text-foreground">Site owners</Link>
           <Link to="/sponsors" className="text-muted-foreground hover:text-foreground">Advertise</Link>
