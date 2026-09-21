@@ -117,13 +117,21 @@ function Navbar({
 }) {
   const [open, setOpen] = useState(false);
   const [mega, setMega] = useState(false);
+  const [products, setProducts] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!mega) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMega(false);
+    if (!mega && !products) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setMega(false);
+      setProducts(false);
+    };
     const onClick = (e: MouseEvent) => {
-      if (wrap.current && !wrap.current.contains(e.target as Node)) setMega(false);
+      if (wrap.current && !wrap.current.contains(e.target as Node)) {
+        setMega(false);
+        setProducts(false);
+      }
     };
     document.addEventListener("keydown", onKey);
     document.addEventListener("mousedown", onClick);
@@ -159,11 +167,41 @@ function Navbar({
               Explore
             </button>
             <button
-              onClick={() => setMega((v) => !v)}
+              onClick={() => {
+                setProducts(false);
+                setMega((v) => !v);
+              }}
               className="flex items-center gap-1 transition-colors hover:text-foreground"
             >
               Categories <ChevronDown className="h-4 w-4" />
             </button>
+            <Link to="/sponsors-hall" className="transition-colors hover:text-foreground">
+              Our Sponsors
+            </Link>
+            <div className="relative">
+              <button
+                onClick={() => {
+                  setMega(false);
+                  setProducts((v) => !v);
+                }}
+                className="flex items-center gap-1 transition-colors hover:text-foreground"
+              >
+                Our Products <ChevronDown className="h-4 w-4" />
+              </button>
+              {products && (
+                <div className="absolute right-0 top-9 z-50 w-56 rounded-2xl border border-border bg-background p-2 shadow-xl">
+                  {ALGERIO_PRODUCTS.map((p) => (
+                    <div
+                      key={p.name}
+                      className="flex items-center justify-between gap-2 rounded-xl px-3 py-2 text-sm hover:bg-muted"
+                    >
+                      <span className="font-medium text-foreground">{p.name}</span>
+                      <span className="text-xs text-muted-foreground">{p.desc}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <button onClick={onSubmit} className="transition-colors hover:text-foreground">
               Submit
             </button>
@@ -206,6 +244,23 @@ function Navbar({
             >
               Categories
             </button>
+            <Link
+              to="/sponsors-hall"
+              onClick={() => setOpen(false)}
+              className="block w-full py-2 text-left text-sm text-muted-foreground"
+            >
+              Our Sponsors
+            </Link>
+            <div className="py-2">
+              <p className="text-sm text-muted-foreground">Our Products</p>
+              <div className="mt-1 grid gap-1">
+                {ALGERIO_PRODUCTS.map((p) => (
+                  <span key={p.name} className="text-sm font-medium">
+                    {p.name} <span className="text-xs text-muted-foreground">· {p.desc}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
             <button
               onClick={() => {
                 setOpen(false);
