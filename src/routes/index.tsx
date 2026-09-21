@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Search, Camera, Menu, X, ChevronDown } from "lucide-react";
 import {
@@ -15,6 +15,7 @@ import Directory from "@/components/Directory";
 import SiteFooter from "@/components/SiteFooter";
 import CookieBanner from "@/components/CookieBanner";
 import { RatingModal, AuthModal, SubmitModal } from "@/components/modals";
+import { ALGERIO_PRODUCTS } from "@/lib/platform";
 import logoAsset from "@/assets/logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -139,7 +140,7 @@ function Navbar({
       document.removeEventListener("keydown", onKey);
       document.removeEventListener("mousedown", onClick);
     };
-  }, [mega]);
+  }, [mega, products]);
 
   return (
     <div ref={wrap}>
