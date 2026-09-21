@@ -150,7 +150,7 @@ function Navbar({
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4">
           <button onClick={onHome} className="flex items-center gap-2 text-base font-bold">
             <img src={logoAsset.url} alt="Algerio logo" className="h-7 w-7 object-contain" />
-            Algerio
+            ALGERIO
           </button>
 
           {compact && (
