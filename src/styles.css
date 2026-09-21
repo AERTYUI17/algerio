@@ -60,7 +60,8 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-surface: var(--surface);
-  --font-sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 :root {
@@ -72,19 +73,19 @@
   --card-foreground: oklch(0.185 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.185 0 0);
-  --primary: oklch(0.611 0.108 216.2);
+  --primary: oklch(0.53 0.211 262.5);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.968 0 0);
   --secondary-foreground: oklch(0.185 0 0);
   --muted: oklch(0.968 0 0);
   --muted-foreground: oklch(0.551 0.023 264.364);
-  --accent: oklch(0.955 0.025 216.2);
-  --accent-foreground: oklch(0.45 0.09 216.2);
+  --accent: oklch(0.955 0.03 262.5);
+  --accent-foreground: oklch(0.44 0.17 262.5);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.611 0.108 216.2);
+  --ring: oklch(0.53 0.211 262.5);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);

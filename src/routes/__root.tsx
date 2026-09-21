@@ -79,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Algerio" },
       { name: "description", content: "Every Algerian website in one place — a curated directory of Algerian sites, tools and platforms." },
-      { name: "author", content: "M7M Holdings" },
+      { name: "author", content: "ALGERIO" },
       { property: "og:title", content: "Algerio" },
       { property: "og:description", content: "Every Algerian website in one place." },
       { property: "og:type", content: "website" },
@@ -90,7 +90,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap",
       },
       {
         rel: "stylesheet",
