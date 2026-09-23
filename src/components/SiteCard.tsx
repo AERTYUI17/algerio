@@ -14,7 +14,7 @@ export default function Card({
   return (
     <article
       onClick={onOpen}
-      className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card transition-all duration-200 hover:scale-[1.02] hover:shadow-xl"
+      className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card lift"
     >
       <div className="aspect-[16/10] w-full overflow-hidden bg-muted">
         <SiteImage site={site} className="h-full w-full" />
